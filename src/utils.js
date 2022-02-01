@@ -42,7 +42,9 @@ async function fetchFunc(url) {
                             });
                         });
                     }
-                    )
+                    ).catch(error => {
+                        console.log(error);
+                    });
                 return pokemons
             }
         }
