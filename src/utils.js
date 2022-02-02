@@ -25,7 +25,7 @@ async function fetchFunc(url) {
     if (url.split("/").pop() === "pokemon") {
         const { data: res1 } = await axios(url);
         const { data: res2 } = await axios(res1.next);
-        results = [...res1.results, ...res2.results];
+        const results = [...res1.results, ...res2.results];
         const pokemons = [];
         return {
             pokemons,
