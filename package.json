@@ -4,8 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "index.js",
+    "start": "nodemon index.js",
     "test": "mocha --timeout 10000 -w ./tests/**/*.spec.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MauricioGiana/pokemon-app-back.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MauricioGiana/pokemon-app-back.git/issues"
   },
   "author": "Henry",
   "license": "ISC",
