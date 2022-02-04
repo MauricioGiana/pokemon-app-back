@@ -2,9 +2,9 @@
   "name": "api",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
-    "start": "nodemon ./routes/index.js",
+    "start": "nodemon ./src/app.js",
     "test": "mocha --timeout 10000 -w ./tests/**/*.spec.js"
   },
   "repository": {
