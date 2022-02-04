@@ -6,8 +6,9 @@ const sequelize = require("sequelize");
 
 
 
-router.get("/", async (req, res) => {
-    const types = await Type.findAll();
+router.get("/", async (req, res, next) => {
+    try {
+        const types = await Type.findAll();
     if (!types || !types.length) {
         const { data: { results } } = await axios("https://pokeapi.co/api/v2/type");
         await axios.all(results.map(async type => {
@@ -18,6 +19,9 @@ router.get("/", async (req, res) => {
         return res.json(tps.sort((a, b) => a.id - b.id));
     }
     res.json(types.sort((a, b) => a.id - b.id));
+    } catch (error) {
+        next(error);
+    }
 });
 
 module.exports = router;

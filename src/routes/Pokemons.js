@@ -24,6 +24,7 @@ router.get("/", async (req, res, next) => {
         });
         if (req.query.filter === "db") response = [...pokemonsDb];
         if (!pokemonsApi) pokemonsApi = await fetchPokemons();
+        console.log("pokes", pokemonsApi);
         if (req.query.filter === "api") response = [...pokemonsApi];
         if (!req.query.filter) response = [...pokemonsApi, ...pokemonsDb];
         if (req.query.type) {

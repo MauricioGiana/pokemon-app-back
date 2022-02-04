@@ -3,18 +3,22 @@ const router = Router();
 const axios = require('axios');
 
 module.exports = fetchPokemons = async (argument) => {
-    let url;
-    if (!argument) {
-        url = "https://pokeapi.co/api/v2/pokemon";
+    try {
+        let url;
+        if (!argument) {
+            url = "https://pokeapi.co/api/v2/pokemon";
+            const result = await fetchFunc(url);
+            await result.get(0, 15);
+            await result.get(15, 30);
+            await result.get(30, 40);
+            return result.pokemons;
+        }
+        url = `https://pokeapi.co/api/v2/pokemon/${argument}`;
         const result = await fetchFunc(url);
-        await result.get(0, 15);
-        await result.get(15, 30);
-        await result.get(30, 40);
-        return result.pokemons;
+        return result;
+    } catch (error) {
+        console.log(error);
     }
-    url = `https://pokeapi.co/api/v2/pokemon/${argument}`;
-    const result = await fetchFunc(url);
-    return result;
 }
 
 async function fetchFunc(url) {
@@ -26,7 +30,8 @@ async function fetchFunc(url) {
         return {
             pokemons,
             get: async (start, end) => {
-                await axios.all(results.slice(start, end).map(result => axios(result.url)))
+                try {
+                    await axios.all(results.slice(start, end).map(result => axios(result.url)))
                     .then((response) => {
                         response.forEach(result => {
                             pokemons.push({
@@ -45,7 +50,9 @@ async function fetchFunc(url) {
                     ).catch(error => {
                         console.log(error);
                     });
-                return pokemons
+                } catch (error) {
+                    console.log(error);
+                }
             }
         }
     }
