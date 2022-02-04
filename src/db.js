@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 const fs = require('fs');
 const path = require('path');
 const {
-  DB_USER, DB_PASSWORD, DB_HOST, FRONT_URL, DB_URI
+  DB_USER, DB_PASSWORD, DB_HOST, FRONT_URL, DATABASE_URL
 } = process.env;
 
 /* const sequelize = new Sequelize(`postgres://${DB_USER}:${DB_PASSWORD}@${DB_HOST}/pokemon`, {
@@ -11,7 +11,7 @@ const {
   native: false, // lets Sequelize know we can use pg-native for ~30% more speed
 }); */
 
-const sequelize = new Sequelize(DB_URI, {
+const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
     ssl: {
       require: true,

@@ -4,12 +4,16 @@ const bodyParser = require('body-parser');
 const morgan = require('morgan');
 const routes = require('./routes/index.js');
 const {FRONT_URL} = require ('./db.js');
+const path = require('path');
 
 require('./db.js');
 
 const server = express();
 
 server.name = 'API';
+
+// Static content
+server.use(express.static(path.join(__dirname, '/public')));
 
 server.use(express.urlencoded({ extended: true, limit: '50mb' }));
 server.use(express.json({ limit: '50mb' }));
