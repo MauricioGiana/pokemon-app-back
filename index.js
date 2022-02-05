@@ -18,7 +18,7 @@
 //                       `=---='
 //     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 const server = require('./src/app.js');
-const { conn, DB_PORT } = require('./src/db.js');
+const { conn, PORT } = require('./src/db.js');
 
 // Syncing all the models at once.
 /* conn.sync({ force: false }).then(() => {
@@ -27,11 +27,11 @@ const { conn, DB_PORT } = require('./src/db.js');
   });
 }).catch(err => console.log(err)) */
 
-server.listen(DB_PORT || 3001, () => {
-  console.log(`Escuchando http://localhost:${DB_PORT}`);
+const app = server.listen(PORT || 3001, () => {
+  console.log(`Escuchando http://localhost:${PORT}`);
   conn.sync({ force: false })
     .then(() => {
-      console.log(`Conectado correctamente a DB`);
+      console.log(`Conectado correctamente DB`);
     }).catch(error => {
       console.log(error);
     });
